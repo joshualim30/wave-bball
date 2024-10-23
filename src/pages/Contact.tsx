@@ -20,7 +20,8 @@ const Contact = () => {
     return (
         <div className='max-w-xs lg:max-w-4xl h-screen flex items-center justify-center mx-auto'>
             <div className='w-full grid-flow-row space-y-6 justify-between'>
-                <h1 className='font-bold text-4xl pb-6'>Contact Us</h1>
+                <h1 className='font-bold text-4xl'>Contact Us</h1>
+                <h2 className='font-normal text-md pb-6'>Have a question, concern, or just want to say hi? Fill out the form below and we'll get back to you as soon as possible!</h2>
                 <Input placeholder="John Doe" isRequired type='name' label='Full Name' value={name} onChange={(e) => setName(e.target.value)} validate={
                     (value) => {
                         // Name Regex

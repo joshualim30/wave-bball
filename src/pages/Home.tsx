@@ -9,10 +9,11 @@ import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import { DatePicker } from "@nextui-org/react";
 import { DateValue, parseDate, getLocalTimeZone } from "@internationalized/date";
 import { useDateFormatter } from "@react-aria/i18n";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const Home = () => {
+    const [isOpenInfo, onOpenChangeInfo] = React.useState(false);
     const [isOpenSuccess, onOpenChangeSuccess] = React.useState(false);
     const [isOpenFailure, onOpenChangeFailure] = React.useState(false);
     const [isOpenEmpty, onOpenChangeEmpty] = React.useState(false);
@@ -26,6 +27,7 @@ const Home = () => {
     const [selectedRelationship, setSelectedRelationship] = React.useState<React.Key>('');
     const [playerName, setPlayerName] = React.useState('');
     const [selectedDOB, setSelectedDOB] = React.useState<DateValue>(parseDate("2000-01-01"));
+    const [highSchool, setHighSchool] = React.useState('');
     const genders = [
         { label: "Male", value: "Male" },
     ];
@@ -103,6 +105,14 @@ const Home = () => {
         <div className='min-h-screen flex justify-center items-center'>
             <div className='text-center gap-6 grid m-10'>
                 <h1 className='font-bold text-4xl'>2024-2025 Tryouts</h1>
+                <h2 className='font-normal text-md'>Deadline is Nov. 3rd, 2024 - Register Now!</h2>
+                <button className='bg-blue-950 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg mb-6' onClick={
+                    () => {
+                        onOpenChangeInfo(true);
+                    }
+                }>
+                    Tryout Information
+                </button>
                 <p className='text-lg'>Parent/Guardian Info</p>
                 <Input placeholder='John Doe' isRequired label='Full Name' value={parentName} onChange={(e) => setParentName(e.target.value)} />
                 <Input placeholder='example@email.com' isRequired label='Email Address' value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -125,6 +135,7 @@ const Home = () => {
                     onChange={setSelectedDOB}
                     isRequired
                 />
+                <Input placeholder='High School' label='Current High School' value={highSchool} onChange={(e) => setHighSchool(e.target.value)} />
                 <div className='grid-flow-col gap-4 grid grid-cols-2'>
                     <Autocomplete
                         label="Gender"
@@ -199,7 +210,7 @@ const Home = () => {
                         } else {
                             try {
                                 // Add registration to Firestore
-                                await addDoc(collection(db, "tryouts"), {
+                                await setDoc(doc(db, "tryouts", playerName.toLowerCase().replace(/\s/g, '-')), {
                                     parentName: parentName,
                                     email: email,
                                     phone: phone,
@@ -207,6 +218,7 @@ const Home = () => {
                                     playerName: playerName,
                                     playerGender: selectedGender,
                                     playerDOB: formatter.format(selectedDOB.toDate(getLocalTimeZone())),
+                                    playerHighSchool: highSchool,
                                     playerGrade: selectedGrade,
                                     playerPosition: selectedPosition,
                                     playerHeight: selectedHeight,
@@ -226,6 +238,7 @@ const Home = () => {
                                 setPlayerName('');
                                 setSelectedGender('');
                                 setSelectedDOB(parseDate("01/01/2000"));
+                                setHighSchool('');
                                 setSelectedGrade('');
                                 setSelectedPosition('');
                                 setSelectedHeight('');
@@ -240,6 +253,7 @@ const Home = () => {
                                 setPlayerName('');
                                 setSelectedGender('');
                                 setSelectedDOB(parseDate("01/01/2000"));
+                                setHighSchool('');
                                 setSelectedGrade('');
                                 setSelectedPosition('');
                                 setSelectedHeight('');
@@ -253,16 +267,28 @@ const Home = () => {
                     }
                 }>Register</Button>
             </div>
+            <Modal isOpen={isOpenInfo} onClose={() => onOpenChangeInfo(false)}>
+                <ModalContent>
+                    <ModalHeader>Tryout Information</ModalHeader>
+                    <ModalBody>
+                        <p>Tryouts will be held on either November 9th or 10th. More information regarding location, exact date, and time will be released soon. Tryout fee is $20 per player, to be paid at the door.</p>
+                        <p>If you have any questions, please contact us at <a href='mailto:' className='underline'>joshualim@wavebasketball.net</a>, or visit the <a href='/contact' className='underline'>Contact Us</a> page.</p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color='primary' onClick={() => onOpenChangeInfo(false)}>Close</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
             <Modal isOpen={isOpenSuccess} onClose={() => onOpenChangeSuccess(false)}>
                 <ModalContent>
                     <ModalHeader>Registration Complete</ModalHeader>
                     <ModalBody>
                         Thank you for registering for tryouts! We will be in touch with more information soon.
                     </ModalBody>
+                    <ModalFooter>
+                        <Button color='primary' onClick={() => onOpenChangeSuccess(false)}>Close</Button>
+                    </ModalFooter>
                 </ModalContent>
-                <ModalFooter>
-                    <Button color='primary' onClick={() => onOpenChangeSuccess(false)}>Close</Button>
-                </ModalFooter>
             </Modal>
             <Modal isOpen={isOpenFailure} onClose={() => onOpenChangeFailure(false)}>
                 <ModalContent>
