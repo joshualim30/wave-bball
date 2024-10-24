@@ -286,7 +286,7 @@ const Home = () => {
                 <ModalContent>
                     <ModalHeader>Tryout Information</ModalHeader>
                     <ModalBody>
-                        <p>Tryouts will be held on either November 9th or 10th. More information regarding location, exact date, and time will be released soon. Tryout fee is $20 per player, to be paid at the door.</p>
+                        <p>Tryouts will be held on November 18th. Tryout fee is $20 per player, to be paid at the door. More information will be sent to the email you register with.</p>
                         <p>If you have any questions, please contact us at <a href='mailto:' className='underline'>joshualim@wavebasketball.net</a>, or visit the <a href='/contact' className='underline'>Contact Us</a> page.</p>
                     </ModalBody>
                     <ModalFooter>

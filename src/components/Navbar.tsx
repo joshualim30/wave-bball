@@ -11,6 +11,7 @@ const SiteNavbar = () => {
     const menuItems = {
         "Home": "/",
         "Roster": "/roster",
+        "Schedule": "/schedule",
         "Our Story": "/our-story",
         "Contact": "/contact",
         // "Log In": "/login"
@@ -32,6 +33,9 @@ const SiteNavbar = () => {
             <NavbarContent className="hidden sm:flex gap-10" justify="center">
                 <NavbarItem>
                     <Link href="/roster">Roster</Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Link href="/schedule">Schedule</Link>
                 </NavbarItem>
                 <NavbarItem>
                     <Link href="/our-story">Our Story</Link>
