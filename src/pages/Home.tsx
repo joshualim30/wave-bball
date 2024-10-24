@@ -9,6 +9,8 @@ import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import { DatePicker } from "@nextui-org/react";
 import { DateValue, parseDate, getLocalTimeZone } from "@internationalized/date";
 import { useDateFormatter } from "@react-aria/i18n";
+import { Divider } from "@nextui-org/divider";
+import { Timeline } from 'react-twitter-widgets'
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -266,6 +268,19 @@ const Home = () => {
                         }
                     }
                 }>Register</Button>
+                <div className='my-6'>
+                    <Divider />
+                </div>
+                {/* Twtter Feed */}
+                <Timeline
+                    dataSource={{
+                        sourceType: 'profile',
+                        screenName: 'wave_bball'
+                    }}
+                    options={{
+                        height: '400',
+                    }}
+                />
             </div>
             <Modal isOpen={isOpenInfo} onClose={() => onOpenChangeInfo(false)}>
                 <ModalContent>
