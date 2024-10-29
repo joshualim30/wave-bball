@@ -72,6 +72,21 @@ const Contact = () => {
                                 timestamp: new Date()
                             });
 
+                            // Add a new document to trigger email notification
+                            await addDoc(collection(db, "mail"), {
+                                to: email,
+                                bcc: "joshualim@wavebasketball.net",
+                                template: {
+                                    name: "contact",
+                                    data: {
+                                        name: name,
+                                        email: email,
+                                        phone: phone ?? "N/A",
+                                        message: message,
+                                    },
+                                },
+                            });
+
                             // Disable loading state
                             setIsLoading(false);
 

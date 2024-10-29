@@ -229,6 +229,36 @@ const Home = () => {
                                     timestamp: new Date()
                                 });
 
+                                // Add a new document to trigger email notification
+                                await setDoc(doc(db, "mail", playerName.toLowerCase().replace(/\s/g, '-')), {
+                                    to: email,
+                                    bcc: "joshualim@wavebasketball.net",
+                                    template: {
+                                        name: "tryout-registration",
+                                        data: {
+                                            parentName: parentName,
+                                            email: email,
+                                            phone: phone,
+                                            relationship: selectedRelationship,
+                                            playerName: playerName,
+                                            playerGender: selectedGender,
+                                            playerDOB: formatter.format(selectedDOB.toDate(getLocalTimeZone())),
+                                            playerHighSchool: highSchool,
+                                            playerGrade: selectedGrade,
+                                            playerPosition: selectedPosition,
+                                            playerHeight: selectedHeight,
+                                            playerWeight: selectedWeight,
+                                            playerExperience: selectedExperience,
+                                            registrationCloseDate: "November 3rd, 2024",
+                                            tryoutRegistrationLink: "https://www.wavebasketball.net",
+                                            coachName: "Joshua Lim",
+                                            coachPhone: "(937) 707-3022",
+                                            coachEmail: "joshualim@wavebasketball.net",
+                                            teamWebsite: "https://www.wavebasketball.net",
+                                        },
+                                    },
+                                });
+
                                 // Open modal
                                 onOpenChangeSuccess(true);
 

@@ -1,0 +1,84 @@
+{{!-- tryout-registration.hbs --}}
+{{!-- Tryout Registration Email Template in Handlebars --}}
+{{!-- Subject: Confirmation: Team Wave {{ageGroup}} Boys Basketball Tryout Signup --}}
+{{!--
+    Parameters:
+    - playerName: string
+    - playerDOB: string
+    - playerHeight: string
+    - playerWeight: string
+    - playerHighSchool: string
+    - playerGrade: string
+    - playerPosition: string
+    - playerExperience: string
+    - playerGender: string
+    - parentName: string
+    - relationship: string
+    - email: string
+    - phone: string
+    - registrationCloseDate: string
+    - tryoutRegistrationLink: string
+    - coachName: string
+    - coachPhone: string
+    - coachEmail: string
+    - teamWebsite: string
+ --}}
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>Confirmation: Team Wave {{playerGrade}} Boys Basketball Tryout Signup</title>
+
+    </head>
+
+    <body>
+
+        <p>Dear {{parentName}},</p>
+
+        <p>Thank you for registering <b>{{playerName}}</b> for the Team Wave {{playerGrade}} Boys Basketball tryouts! We’re thrilled to have them join us and look forward to seeing their skills on the court. We plan to send more information regarding tryouts after registration closes on {{registrationCloseDate}}. In the meantime, please review the information we have on file and let us know if any details need updating:</p>
+
+        <h2>Player Information</h2>
+
+        <ul>
+            <li>Name: {{playerName}}</li>
+            <li>Date of Birth: {{playerDOB}}</li>
+            <li>Height: {{playerHeight}}</li>
+            <li>Weight: {{playerWeight}}</li>
+            <li>High School: {{playerHighSchool}}</li>
+            <li>Age Group: {{playerGrade}}</li>
+            <li>Position: {{playerPosition}}</li>
+            <li>Experience Level: {{playerExperience}}</li>
+            <li>Gender: {{playerGender}}</li>
+        </ul>
+
+        <h2>Parent/Guardian Information</h2>
+
+        <ul>
+            <li>Name: {{parentName}}</li>
+            <li>Relationship to Player: {{relationship}}</li>
+            <li>Email: {{email}}</li>
+            <li>Phone Number: {{phone}}</li>
+        </ul>
+
+        <h2>Spread the Word!</h2>
+
+        <p>If you know other players or families who might be interested in trying out, we would love for you to pass along this opportunity! Feel free to share the Team Wave tryout information or send them this link to sign up: <a href="{{tryoutRegistrationLink}}">{{tryoutRegistrationLink}}</a>. We want to welcome as many talented and passionate players as possible!</p>
+
+        <p>If you have any questions, please don’t hesitate to reach out. We’re excited for a fantastic tryout experience and look forward to meeting you and your son soon.</p>
+
+        <p>Best regards,</p>
+
+        <p>
+            <b>Head Coach {{coachName}}</b><br />
+            Team Wave<br />
+            Phone: {{coachPhone}}<br />
+            Email: {{coachEmail}}<br />
+            Website: <a href="{{teamWebsite}}">{{teamWebsite}}</a>
+        </p>
+
+    </body>
+
+</html>
