@@ -206,10 +206,14 @@ const Home = () => {
                 </div>
                 <Button color='primary' onClick={
                     async () => {
-                        if (parentName === '' || email === '' || phone === '' || selectedRelationship === '' || playerName === '' || selectedGender === '' || selectedGrade === '' || selectedPosition === '' || selectedHeight === '' || selectedWeight === '' || selectedExperience === '') {
+                        // Check if registration is closed
+                        if (new Date() > new Date(2024, 10, 3)) {
+                            // Open modal
+                            onOpenChangeFailure(true);
+                        } else if (parentName === '' || email === '' || phone === '' || selectedRelationship === '' || playerName === '' || selectedGender === '' || selectedGrade === '' || selectedPosition === '' || selectedHeight === '' || selectedWeight === '' || selectedExperience === '') { // Check if any fields are empty
                             // Open modal
                             onOpenChangeEmpty(true);
-                        } else {
+                        } else { // Register for tryouts
                             try {
                                 // Add registration to Firestore
                                 await setDoc(doc(db, "tryouts", playerName.toLowerCase().replace(/\s/g, '-')), {
